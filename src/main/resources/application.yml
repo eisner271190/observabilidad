@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - traceId=%X{traceId} spanId=%X{spanId} - %msg%n"
+  level:
+    io.opentelemetry: TRACE
+    org.springframework.boot.actuate.tracing: TRACE
+    org.apache.http: DEBUG
+    io.micrometer: DEBUG
+    io.micrometer.tracing: TRACE
+    com.example.observabilidad: DEBUG
+
+spring:
+  application:
+    name: observabilidad-demo
+
+micrometer:
+  tracing:
+    enabled: true
+    bridge-otel:
+      enabled: true
+
+otel:
+  exporter:
+    otlp:
+      endpoint: "otel-collector:4317"
+      protocol: grpc
+  traces:
+    exporter: otlp
+    sampler:
+      probability: 1.0
+  metrics:
+    export:
+      enabled: true
