@@ -1,5 +1,5 @@
 # Build stage
-FROM maven:3.8.6-eclipse-temurin-17 AS builder
+FROM docker.io/maven:3.8.6-eclipse-temurin-17 AS builder
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY src src
 RUN mvn package -DskipTests
 
 # Runtime stage
-FROM eclipse-temurin:17-jre-jammy AS runtime
+FROM docker.io/eclipse-temurin:17-jre-jammy AS runtime
 
 WORKDIR /app
 
