@@ -10,7 +10,9 @@ exporters:
   debug:
     verbosity: detailed
   elasticsearch:
-    endpoints: ["http://elasticsearch:9200"]
+    endpoint: "http://elasticsearch:9200"
+    mapping:
+      mode: "ecs"
 
 service:
   pipelines:

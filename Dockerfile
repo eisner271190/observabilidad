@@ -11,7 +11,7 @@ RUN mvn dependency:go-offline -B
 COPY src src
 
 # Build the application
-RUN mvn package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Runtime stage
 FROM docker.io/eclipse-temurin:17-jre-jammy AS runtime
